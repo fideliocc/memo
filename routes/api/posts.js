@@ -74,8 +74,9 @@ router.get("/favorites/:id", (req, res) => {
 // @desc    Get Posts (with "Approved status") by user Id
 // @access  Public
 router.get("/user/:user_id", (req, res) => {
-  Post.find({ user: req.params.user_id })
+  Post.find({ $and: [{ user: req.params.user_id }, { status: "approved" }] })
     .sort({ date: -1 })
+    //.then(myposts => {res.json(myposts)})
     .then(myposts => {res.json(myposts)})
     .catch(err => res.status(404).json({ nopostsfound: "No posts found" }));
 });
