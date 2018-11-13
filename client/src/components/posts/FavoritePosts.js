@@ -8,12 +8,8 @@ import { getFavoritesById } from '../../actions/postActions';
 
 class FavoritePosts extends Component {
 
-  componentDidMount() {
-    this.props.getFavoritesById(this.props.profile.profile.user._id);
-  }
 
   render() {
-   
     const { favposts, loading } = this.props.post;
     let postContent;
 

@@ -17,7 +17,6 @@ import {
 } from 'react-share';
 
 class MyPostItem extends Component {
-
   onDeleteClick(id) {
     this.props.deletePost(id);
   }
@@ -56,7 +55,7 @@ class MyPostItem extends Component {
       <div className="card card-body mb-3">
         <div className="row">
           <div className="col-md-10">
-          <Link to={`/profile/${post.name}`} ><strong className="text-left">{post.name}</strong></Link>
+          <Link to={`/profile/${post.name}`}><strong className="text-left">{post.name}</strong></Link>
             <p className="lead">{post.text}</p>
             <div className="row"><div className="col-md-10"><p className="small text-muted">Publicado: {date}</p></div></div>
             

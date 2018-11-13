@@ -9,10 +9,14 @@ import Spinner from '../common/Spinner';
 import { getProfileByHandle, getCurrentProfile } from '../../actions/profileActions';
 
 class Profile extends Component {
+
   componentDidMount() {
-    if (this.props.match.params.handle) {
-      this.props.getProfileByHandle(this.props.match.params.handle);
+    const handle = this.props.match.params.handle;
+    //console.log(handle)
+    if (handle) {
+      this.props.getProfileByHandle(handle);
     }
+    //this.props.history.push(`/profile/${handle}`)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -20,9 +24,19 @@ class Profile extends Component {
       this.props.history.push('/not-found');
     }
   }
+  
+  // OMG!!!
+  componentDidUpdate(prevProps) {
+    const oldHandle = prevProps.match.params.handle;
+    const newHandle = this.props.match.params.handle;
+    if(oldHandle !== newHandle) {
+      this.props.getProfileByHandle(newHandle);
+    }
+  }
 
   render() {
     const { profile, loading } = this.props.profile;
+    //console.log(this.props.match.params.handle, 'profile');
     let profileContent;
 
     if (profile === null || loading) {

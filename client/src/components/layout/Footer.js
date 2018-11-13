@@ -45,9 +45,9 @@ class Footer extends Component {
     >
       <img src={Icon} className="favicon" />
       <h1>Las peores historias del día</h1>
-      <h5>Un espacio para compartir tus desgracias o dejarlas ir.</h5><hr/>
+      <h5>Un espacio para compartir tus desgracias y dejarlas ir.</h5><hr/>
       <p>Publica y espera nuestra aprobación para que aparezca a la comunidad, así nos aseguramos de mantener solo las peores historias.
-      Si la tuya no ha sido aceptada, un tiempo después desaparecerá de la lista. Pero tranquilidad, siempre tendrás algo que contar.</p>
+      Si la tuya no aparece en tus posts en las próximas 24 horas simplemente habrá desaparecido. Pero tranquilidad, siempre tendrás algo terrible que contar.</p>
       <br />
       <p><Link to={"/login"}>Inicia sesión</Link> o <Link to={"/register"}>regístrate</Link> para continuar</p>
     </Modal>

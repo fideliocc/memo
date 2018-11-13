@@ -5,26 +5,20 @@ import { connect } from 'react-redux';
 import FavoritePosts from '../posts/FavoritePosts'
 import MyPosts from '../posts/MyPosts'
 import { Link } from 'react-router-dom'
-import { getMyPosts, getFavorites } from '../../actions/postActions';
+import { getMyPosts, getFavoritesById } from '../../actions/postActions';
 
 class ProfileAbout extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      myFavs : false
+      myFavs : null
     }
   }
-
-  componentDidMount() {
-    //this.props.getCurrentProfile();
-    this.props.getMyPosts(this.props.auth.user.id)
-    this.props.getFavorites();
-    console.log(this.props.post)
-  }
-
+  
   onMyFavsClick(e) {
     e.preventDefault();
-    this.setState({ myFavs: true })
+    this.setState({ myFavs: true });
+    console.log(this.props.post.favposts.length)
   }
 
   onMyPostsClick(e) {
@@ -51,7 +45,7 @@ class ProfileAbout extends Component {
 ProfileAbout.propTypes = {
   profile: PropTypes.object.isRequired,
   getMyPosts: PropTypes.func.isRequired,
-  getFavorites: PropTypes.func.isRequired
+  getFavoritesById: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -60,4 +54,4 @@ const mapStateToProps = state => ({
   post: state.post
 });
 
-export default connect(mapStateToProps, { getMyPosts, getFavorites })(ProfileAbout);
+export default connect(mapStateToProps, { getMyPosts, getFavoritesById })(ProfileAbout);

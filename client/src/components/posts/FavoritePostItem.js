@@ -26,25 +26,24 @@ class FavoritePostItem extends Component {
     }
   }
 
-  setRedirect = () => {
-    this.setState({
-      redirect: true
-    })
-  }
+  // setRedirect = () => {
+  //   this.setState({
+  //     redirect: true
+  //   })
+  // }
 
-  renderRedirect = () => {
-    if (this.state.redirect) {
-      return <Redirect to={`/profile/${this.props.profile.profile.handle}`} />
-    }
-    //this.props.history.push("/profile")
-  }
+  // renderRedirect = () => {
+  //   if (this.state.redirect) {
+  //     return <Redirect to={`/profile/${this.props.profile.profile.handle}`} />
+  //   }
+  // }
 
-  onNameClick(e) {
-    e.preventDefault();
-    this.props.clearCurrentProfile();
-    this.props.getProfileByHandle(this.props.post.name);
-    this.setRedirect();
-  }
+  // onNameClick(e) {
+  //   e.preventDefault();
+  //   this.props.clearCurrentProfile();
+  //   this.props.getProfileByHandle(this.props.post.name);
+  //   this.setRedirect();
+  // }
 
   onDeleteClick(id) {
     this.props.deletePost(id);
@@ -84,8 +83,8 @@ class FavoritePostItem extends Component {
       <div className="card card-body mb-3">
         <div className="row">
           <div className="col-md-10">
-          {this.renderRedirect()}
-          <Link to="" onClick={this.onNameClick.bind(this)}><strong className="text-left">{post.name}</strong></Link>
+          
+          <Link to={`/profile/${post.name}`} ><strong className="text-left">{post.name}</strong></Link>
             <p className="lead">{post.text}</p>
             <div className="row"><div className="col-md-10"><p className="small text-muted">Publicado: {date}</p></div></div>
             {showActions ? (

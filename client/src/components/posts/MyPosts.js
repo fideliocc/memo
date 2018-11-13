@@ -4,12 +4,15 @@ import { connect } from 'react-redux';
 /* import PostForm from './PostForm';*/
 import MyPostFeed from './MyPostFeed';
 import Spinner from '../common/Spinner';
-import { getMyPosts } from '../../actions/postActions';
+import { getMyPosts, getFavoritesById } from '../../actions/postActions';
 
 class MyPosts extends Component {
 
-  componentDidMount() {
-    this.props.getMyPosts(this.props.profile.profile.user._id);
+  // For MyPosts and FavoritePosts
+  componentWillMount() {
+    const id = this.props.profile.profile.user._id
+    this.props.getMyPosts(id);
+    this.props.getFavoritesById(id);
   }
 
   render() {
@@ -41,6 +44,7 @@ class MyPosts extends Component {
 
 MyPosts.propTypes = {
   getMyPosts: PropTypes.func.isRequired,
+  getFavoritesById: PropTypes.func.isRequired,
   post: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired
@@ -52,5 +56,5 @@ const mapStateToProps = state => ({
   profile: state.profile
 });
 
-export default connect(mapStateToProps, { getMyPosts })(MyPosts);
+export default connect(mapStateToProps, { getMyPosts, getFavoritesById })(MyPosts);
 

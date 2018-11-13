@@ -114,7 +114,7 @@ export const getMyPosts = user_id => dispatch => {
     .catch(err =>
       dispatch({
         type: GET_MY_POSTS,
-        payload: null
+        payload: err.response.data
       })
     );
 };
@@ -244,17 +244,6 @@ export const addLikeMyPosts = (id, user_id) => dispatch => {
 };
 
 
-// Add Favorite for My Posts Feed
-export const addFavoriteMyPosts = (id, user_id) => dispatch => {
-  axios
-  .post(`/api/posts/favorite/${id}`)
-  .then(res => dispatch(getMyPosts(user_id)))
-  .catch(err => dispatch({
-    type: GET_ERRORS,
-    payload: err.response.data
-  }))
-}
-
 // Get Favorites of current user
 export const getFavorites =  () => dispatch => {
   dispatch(setPostLoading());
@@ -272,8 +261,9 @@ export const getFavorites =  () => dispatch => {
 )
 }
 
+
 // Get Favorites by Id
-export const getFavoritesById =  (id) => dispatch => {
+export const getFavoritesById =  id => dispatch => {
   dispatch(setPostLoading());
   axios
   .get(`/api/posts/favorites/${id}`)
@@ -288,6 +278,19 @@ export const getFavoritesById =  (id) => dispatch => {
   })
 )
 }
+
+// Add Favorite for My Posts Feed
+export const addFavoriteMyPosts = (id, user_id) => dispatch => {
+  axios
+  .post(`/api/posts/favorite/${id}`)
+  .then(res => dispatch(getMyPosts(user_id)))
+  .catch(err => dispatch({
+    type: GET_ERRORS,
+    payload: err.response.data
+  }))
+}
+
+
 
 // Add Comment
 export const addComment = (postId, commentData) => dispatch => {

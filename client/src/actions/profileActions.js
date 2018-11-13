@@ -9,24 +9,6 @@ import {
   SET_CURRENT_USER
 } from './types';
 
-// Get profile by handle
-export const getProfileByHandle = handle => dispatch => {
-  dispatch(setProfileLoading());
-  axios
-    .get(`/api/profile/${handle}`)
-    .then(res =>
-      dispatch({
-        type: GET_PROFILE,
-        payload: res.data
-      })
-    )
-    .catch(err =>
-      dispatch({
-        type: GET_PROFILE,
-        payload: null
-      })
-    );
-};
 
 // Get profile of current user
 export const getCurrentProfile = () => dispatch => {
@@ -60,6 +42,26 @@ export const createProfile = (profileData, history) => dispatch => {
     );
 };
 
+  // Get profile by handle
+  export const getProfileByHandle = handle => dispatch => {
+    dispatch(clearCurrentProfile())
+    //dispatch(setProfileLoading())
+    axios
+      .get(`/api/profile/${handle}`)
+      .then(res =>
+        dispatch({
+          type: GET_PROFILE,
+          payload: res.data
+        })
+      )
+      .catch(err =>
+        dispatch({
+          type: GET_PROFILE,
+          payload: null
+        })
+      );
+  };
+
 // Delete account & profile
 export const deleteAccount = () => dispatch => {
     if (window.confirm('Estás seguro(a)? Esto no puede ser deshecho!')) {
@@ -79,6 +81,8 @@ export const deleteAccount = () => dispatch => {
         );
     }
   };
+
+
   
   // Profile loading
   export const setProfileLoading = () => {

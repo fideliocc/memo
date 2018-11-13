@@ -3,7 +3,6 @@ import isEmpty from '../../validation/is-empty';
 
 class ProfileHeader extends Component {
   render() {
-    console.log(profile)
     const { profile } = this.props;
     const date = profile.user.date.toString().split("T", 1)
 
@@ -14,24 +13,27 @@ class ProfileHeader extends Component {
 
             <div className="text-center">
               <h1 className="display-4 text-center">{profile.user.name}</h1>
-
               <div>
-              <p>Usuario desde: {date}</p>
-            </div>
-              {isEmpty(profile.location) ? null : <p>{profile.location}</p>}
+              <p><span className="fas fa-calendar-alt"></span> {date}</p>
+              </div>
+              {isEmpty(profile.location) ? null : <p><span className="fas fa-globe-americas"></span> {profile.location}</p>}
 
               <p className="lead">
               {isEmpty(profile.bio) ? (
-                <span>...</span>
+               null
               ) : (
                 <span>{profile.bio}</span>
               )}
+              </p>
+
+              <p>
 
                 {isEmpty(profile.social && profile.social.twitter) ? null : (
                   <a
                     className="text-white p-2"
-                    href={profile.social.twitter}
+                    href={`${profile.social.twitter}`}
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <i className="fab fa-twitter fa-2x" />
                   </a>
@@ -40,8 +42,9 @@ class ProfileHeader extends Component {
                 {isEmpty(profile.social && profile.social.facebook) ? null : (
                   <a
                     className="text-white p-2"
-                    href={profile.social.facebook}
+                    href={`${profile.social.facebook}`}
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <i className="fab fa-facebook fa-2x" />
                   </a>

@@ -25,6 +25,14 @@ class CreateProfile extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  // TODO: Redirects to /profile/$handle ???
+  /***  Redirige a la ruta del mismo componente apenas se monta y 
+   * soluciona la necesidad de refresh para obtener los datos ***/
+  componentDidMount() {
+    //this.props.getCurrentProfile();
+    this.props.history.push("/edit-profile")
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
@@ -32,7 +40,6 @@ class CreateProfile extends Component {
 
     if (nextProps.profile.profile) {
       const profile = nextProps.profile.profile;
-
       // If profile field doesnt exist, make empty string
       profile.location = !isEmpty(profile.location) ? profile.location : '';
 
@@ -64,7 +71,6 @@ class CreateProfile extends Component {
       twitter: this.state.twitter,
       facebook: this.state.facebook,
     };
-
     this.props.createProfile(profileData, this.props.history);
   }
 
@@ -73,7 +79,7 @@ class CreateProfile extends Component {
   }
 
   render() {
-    //console.log(this.props.profile)
+
     const { errors, displaySocialInputs } = this.state;
 
     let socialInputs;
@@ -82,7 +88,7 @@ class CreateProfile extends Component {
       socialInputs = (
         <div>
           <InputGroup
-            placeholder="Twitter URL"
+            placeholder="https://twitter.com/usuario"
             name="twitter"
             icon="fab fa-twitter"
             value={this.state.twitter}
@@ -91,7 +97,7 @@ class CreateProfile extends Component {
           />
 
           <InputGroup
-            placeholder="Facebook URL"
+            placeholder="https://facebook.com/usuario"
             name="facebook"
             icon="fab fa-facebook"
             value={this.state.facebook}

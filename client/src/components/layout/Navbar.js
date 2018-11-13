@@ -22,12 +22,13 @@ class Navbar extends Component {
 
   renderRedirect = () => {
     if (this.state.redirect) {
+      console.log("AJAAA")
       return <Redirect to={`/profile/${this.props.auth.user.name}`} />
     }
   }
 
    componentDidMount() {
-    this.props.getCurrentProfile();
+    //this.props.getCurrentProfile();
   }
 
   onMyProfileClick(e) {
@@ -44,11 +45,10 @@ class Navbar extends Component {
 
   render() {
     const { isAuthenticated, user } = this.props.auth;
-    const { loading, profile }  = this.props.profile
+    const { loading }  = this.props.profile
     let authLinks;
     
-    
-    if (profile === null || loading) {
+      if (user.name === null || loading ) {
       authLinks = "..."
     } else {
       authLinks = (
@@ -56,7 +56,7 @@ class Navbar extends Component {
         <li className="nav-item dropdown">
         <Link className="nav-link btn-lg dropdown-toggle" data-toggle="dropdown" to="#" role="button" aria-haspopup="true" aria-expanded="false">Hola, {user.name}</Link>
         <div className="dropdown-menu">
-          <Link className="dropdown-item" to="" onClick={this.onMyProfileClick.bind(this)}>Mi perfil</Link>
+          <Link className="dropdown-item" to={`/profile/${user.name}`} >Mi perfil</Link>
 
           <Link className="dropdown-item" to="/dashboard">Mi cuenta</Link>
           {/*<a className="dropdown-item" href="#">Another action</a>*/}

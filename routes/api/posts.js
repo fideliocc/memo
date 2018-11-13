@@ -46,41 +46,6 @@ router.get("/", (req, res) => {
 });
 
 
-// @route   GET api/posts/favorites
-// @desc    Get posts faved by user
-// @access  Private
-router.get("/favorites", passport.authenticate("jwt", { session: false }), (req, res) => {
-  User.findById(req.user.id).then(user => {
-    // Use mongoDB query $elemMatch
-    Post.find({ favorites: { $elemMatch:{ user } }}).then(posts => {
-      res.json(posts)
-    })
-  })
-})
-
-// @route   GET api/posts/favorites/:id
-// @desc    Get posts faved by user
-// @access  Private
-router.get("/favorites/:id", (req, res) => {
-  User.findById(req.params.id).then(user => {
-    // Use mongoDB query $elemMatch
-    Post.find({ favorites: { $elemMatch:{ user } }}).then(posts => {
-      res.json(posts)
-    })
-  })
-})
-
-// @route   GET api/posts/user/:user_id
-// @desc    Get Posts (with "Approved status") by user Id
-// @access  Public
-router.get("/user/:user_id", (req, res) => {
-  Post.find({ $and: [{ user: req.params.user_id }, { status: "approved" }] })
-    .sort({ date: -1 })
-    //.then(myposts => {res.json(myposts)})
-    .then(myposts => {res.json(myposts)})
-    .catch(err => res.status(404).json({ nopostsfound: "No posts found" }));
-});
-
 // @route   GET api/posts/:id
 // @desc    Get post by Id
 // @access  Public
@@ -121,6 +86,43 @@ router.delete(
     });
   }
 );
+
+// @route   GET api/posts/favorites
+// @desc    Get posts faved by user
+// @access  Private
+router.get("/favorites", passport.authenticate("jwt", { session: false }), (req, res) => {
+  User.findById(req.user.id).then(user => {
+    // Use mongoDB query $elemMatch
+    Post.find({ favorites: { $elemMatch:{ user } }}).then(posts => {
+      res.json(posts)
+    })
+  })
+})
+
+// @route   GET api/posts/favorites/:id
+// @desc    Get posts faved by user
+// @access  Private
+router.get("/favorites/:id", (req, res) => {
+  User.findById(req.params.id).then(user => {
+    // Use mongoDB query $elemMatch
+    Post.find({ favorites: { $elemMatch:{ user } }})
+    //.sort({ date: -1 })
+    .then(posts => {
+      res.json(posts)
+    })
+  })
+})
+
+// @route   GET api/posts/user/:user_id
+// @desc    Get Posts (with "Approved status") by user Id
+// @access  Public
+router.get("/user/:user_id", (req, res) => {
+  Post.find({ $and: [{ user: req.params.user_id }, { status: "approved" }] })
+    .sort({ date: -1 })
+    //.then(myposts => {res.json(myposts)})
+    .then(myposts => {res.json(myposts)})
+    .catch(err => res.status(404).json({ nopostsfound: "No posts found" }));
+});
 
 
 // @route   POST api/posts/like/:id
