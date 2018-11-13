@@ -163,7 +163,7 @@ class PostItem extends Component {
                 <div className="row">
                 <div className="col-md-auto">
                 <TwitterShareButton
-                  url={`http://elmuro.com/${post._id}`}
+                  url={`https://elmuro.com/${post._id}`}
                   title={post.text}
                   /*via=""*/
                 >
@@ -172,7 +172,7 @@ class PostItem extends Component {
                 </div>
                 
                 <FacebookShareButton
-                  url={`http://elmuro.com/${post._id}`}
+                  url={`https://elmuro.com/${post._id}`}
                   quote={post.text}
                 >
                 <div className="col-md-auto">
