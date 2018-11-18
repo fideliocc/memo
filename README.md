@@ -1,16 +1,19 @@
 # Memo
 [https://memo-web.herokuapp.com](https://memo-web.herokuapp.com)
+
 A simple social network to share the worst moments in day. Wait for the approval before see it available, if not anyway you've let that go. But don't worry, always you'll have something to tell us back.
 
 **Release:** v1.0.0
+
 **Status:** Done and working on future release.
+
 **About the idea:** This project was born to give a space to throw your daily problems and laugh about, and is the result of my web development skills acquired on the last months. I want to collect some good stories here, so if you are interested in collaborate in some way or just to give a suggestion feel free to contact me.
 
 ## **Built with**
 mLab (mongoDB) + Express + React.js + Redux
 
 ## **Prerequisites**
-- Memo is running on mLab database service. You can create an account at [mlab.com](https://mlab.com), then a new user and database for free. The generated URI will be pasted on ./config/keys_dev.js
+- Memo is running on mLab database service. You can create an account at [mlab.com](https://mlab.com), then create a new user and database for free. The generated URI will be pasted on ./config/keys_dev.js
 - Node.js (last stable version): Download from https://nodejs.org/es/download/
 -  create-react-app globally installed:
 ```bash
@@ -46,13 +49,14 @@ The approval of the posts is given by an administrador, with an independent auth
 Find it on **./routes/api** and **./routes/admin/api**. The approval of the posts is given by an administrador, with an independent authorization and functions. 
 
 There are three main endpoints for users page:
- **api/posts**
- **api/profile**
- **api/users**
+
+-  **api/posts**
+-  **api/profile**
+-  **api/users**
  
  There are two main endpoints for admin page:
- **api/admin/users**
- **api/admin/posts**
+-  **api/admin/users**
+-  **api/admin/posts**
  
  Please check the description on files to understand the function and the access of each route.
  
